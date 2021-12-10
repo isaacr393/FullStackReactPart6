@@ -25,7 +25,8 @@ const reducer = (state = initialState, action) => {
 
   switch ( action.type ){
     case 'VOTE':
-      return state.map(anecdote => anecdote.id === action.data? {...anecdote, votes: anecdote.votes + 1}:anecdote)
+      let newState = state.map(anecdote => anecdote.id === action.data? {...anecdote, votes: anecdote.votes + 1}:anecdote)
+      return newState.sort( (prev, current ) => current.votes - prev.votes )
 
     case 'CREATE':
       return state.concat( action.data )
