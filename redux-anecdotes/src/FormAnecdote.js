@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { createAction } from './reducers/anecdoteReducer'
+import { newMessageAction, deleteMessageAction } from './reducers/messageReducer'
 
 const FormAnecdote = () => {
     const dispatch = useDispatch()
@@ -10,6 +11,10 @@ const FormAnecdote = () => {
         let content = e.target.anecdote.value
         e.target.anecdote.value = ""
         dispatch( createAction(content) )
+        dispatch( newMessageAction(`You created the note: ${content}`) )
+        setTimeout( () => {
+            dispatch( deleteMessageAction() )
+        },3000 )
     }
 
     return (
