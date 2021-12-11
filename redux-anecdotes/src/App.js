@@ -5,7 +5,6 @@ import AnecdoteList from './AnecdoteList'
 const App = () => {
   return (
     <div>
-      
       <AnecdoteList />
       <FormAnecdote />
     </div>
