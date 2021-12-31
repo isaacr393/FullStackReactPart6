@@ -12,10 +12,17 @@ const reducerMessage = ( state = "", action ) => {
     }
 }
 
-export const newMessageAction = (msg) =>{
-    return{
-        type:'NEW_MESSAGE',
-        data: msg
+export const newMessageAction = (msg, time) =>{
+    return dispatch => {
+        //console.log(msg,time)
+        let timeToVanish  = time * 1000
+        dispatch({
+            type:'NEW_MESSAGE',
+            data: msg
+        })
+        setTimeout( () => {            
+            dispatch( deleteMessageAction() )
+        },timeToVanish )
     }
 }
 
