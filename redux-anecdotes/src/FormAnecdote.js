@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { createAction } from './reducers/anecdoteReducer'
-import { newMessageAction, deleteMessageAction } from './reducers/messageReducer'
+import { newMessageAction } from './reducers/messageReducer'
 
 const FormAnecdote = () => {
     const dispatch = useDispatch()

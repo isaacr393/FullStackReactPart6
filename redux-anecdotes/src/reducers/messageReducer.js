@@ -4,9 +4,14 @@ const reducerMessage = ( state = "", action ) => {
 
     switch( action.type ){
         case 'NEW_MESSAGE':
+            if( state.timeOut !== null )
+                clearTimeout(state.timeOut)
             return action.data
         case 'DELETE_MESSAGE':
-            return ""
+            return {
+                msg:"",
+                timeOut: null
+            }
         default:
             return state
     }
@@ -15,14 +20,19 @@ const reducerMessage = ( state = "", action ) => {
 export const newMessageAction = (msg, time) =>{
     return dispatch => {
         //console.log(msg,time)
-        let timeToVanish  = time * 1000
-        dispatch({
-            type:'NEW_MESSAGE',
-            data: msg
-        })
-        setTimeout( () => {            
+        let timeToVanish  = time * 1000        
+
+        let timeOut = setTimeout( () => {            
             dispatch( deleteMessageAction() )
         },timeToVanish )
+
+        dispatch({
+            type:'NEW_MESSAGE',
+            data: {
+                msg: msg,
+                timeOut
+            }
+        })
     }
 }
 
