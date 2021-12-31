@@ -2,15 +2,17 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { createAction } from './reducers/anecdoteReducer'
 import { newMessageAction, deleteMessageAction } from './reducers/messageReducer'
+import anecdoteService from './services/anecdoteService'
 
 const FormAnecdote = () => {
     const dispatch = useDispatch()
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         let content = e.target.anecdote.value
         e.target.anecdote.value = ""
-        dispatch( createAction(content) )
+        let newAnecdote = await anecdoteService.create( content )
+        dispatch( createAction(newAnecdote) )
         dispatch( newMessageAction(`You created the note: ${content}`) )
         setTimeout( () => {
             dispatch( deleteMessageAction() )

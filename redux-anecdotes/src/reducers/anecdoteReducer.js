@@ -1,12 +1,3 @@
-const getId = () => (100000 * Math.random()).toFixed(0)
-
-const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: getId(),
-    votes: 0
-  }
-}
 
 const reducerAnecdote = (state = [], action) => {
   /* console.log('state now: ', state)
@@ -36,10 +27,10 @@ export const voteAction = ( id ) =>{
   }
 }
 
-export const createAction = ( content ) => {
+export const createAction = ( anecdote ) => {
   return{
     type: 'CREATE',
-    data: asObject(content)
+    data: anecdote
   }
 }
 
